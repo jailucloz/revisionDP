@@ -25,7 +25,7 @@ width: 40%}
 			<acme:message code="administrator.dashboard.form.table.cell.ratio-investment-1"/>
 		</td>
 		<td>
-			<acme:print value="${ ratioInvestmentXX1}%"/>
+			<acme:print value="${ ratioInvestmentRomp}%"/>
 		</td>
 	</tr>
 	<tr>
@@ -33,7 +33,7 @@ width: 40%}
 			<acme:message code="administrator.dashboard.form.table.cell.ratio-application-1"/>
 		</td>
 		<td>
-			<acme:print value="${ ratioApplicationsXX1}%"/>
+			<acme:print value="${ ratioApplicationsAddiInfo}%"/>
 		</td>
 	</tr>
 	<tr>
@@ -41,7 +41,7 @@ width: 40%}
 			<acme:message code="administrator.dashboard.form.table.cell.ratio-application-2"/>
 		</td>
 		<td>
-			<acme:print value="${ ratioApplicationsXX2}%"/>
+			<acme:print value="${ ratioApplicationsPass}%"/>
 		</td>
 	</tr>
 </table>

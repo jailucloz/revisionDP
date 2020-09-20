@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.entities.applications.Application;
+import acme.entities.applications.ApplicationStatus;
 import acme.entities.investmentRounds.Investment;
 import acme.entities.roles.Entrepreneur;
 import acme.entities.roles.Investor;
@@ -49,21 +50,28 @@ public class InvestorApplicationCreateService implements AbstractCreateService<I
 		assert entity != null;
 		assert model != null;
 
+		int invId = request.getModel().getInteger("invId");
+		model.setAttribute("invId", invId);
+
 		request.unbind(entity, model, "ticker", "creationMoment", "statement", "offer", "investmentRound.ticker", "additionalInformation", "password");
 	}
 
 	@Override
 	public Application instantiate(final Request<Application> request) {
 
+		assert request != null;
+
 		Application result;
 		Principal principal;
+
+		int invId = request.getModel().getInteger("invId");
 
 		principal = request.getPrincipal();
 
 		Entrepreneur entrepreneur;
 		result = new Application();
 
-		Investment i = this.repositoryInvest.findOneInvestmentRoundById(request.getModel().getInteger("id"));
+		Investment i = this.repository.findOneInvestmentRoundById(invId);
 		entrepreneur = i.getEntrepreneur();
 		Date moment;
 		moment = new Date(System.currentTimeMillis() - 1);
@@ -75,6 +83,7 @@ public class InvestorApplicationCreateService implements AbstractCreateService<I
 		result.setPassword(null);
 		result.setInvestor(investor);
 		result.setInvestmentRound(i);
+		result.setStatus(ApplicationStatus.PENDING);
 		result.setEntrepreneur(entrepreneur);
 
 		return result;
@@ -86,33 +95,42 @@ public class InvestorApplicationCreateService implements AbstractCreateService<I
 		assert entity != null;
 		assert errors != null;
 
+		/*
+		 * if (!errors.hasErrors("ticker")) {
+		 * Boolean unique = null;
+		 * unique = this.repository.findApplicationByTicker(entity.getTicker()) != null;
+		 * errors.state(request, !unique, "ticker", "investor.application.error.duplicatedTicker");
+		 * }
+		 *
+		 * if (!errors.hasErrors("password")) {
+		 * Boolean hasLinkPassword, hasLink, hasPassword = null;
+		 * hasLink = !request.getModel().getString("additionalInformation").isEmpty();
+		 * hasPassword = !request.getModel().getString("password").isEmpty();
+		 * if (!hasLink && hasPassword) {
+		 * hasLinkPassword = false;
+		 * } else {
+		 * hasLinkPassword = true;
+		 * }
+		 * errors.state(request, hasLinkPassword, "password", "investor.application.error.password");
+		 *
+		 * Boolean regexPassword = null;
+		 * String password = request.getModel().getString("password");
+		 * String regexx = "^(?=.*[A-Za-z]){1,}(?=.*[0-9]){1,}(?=.*[\\W]){1,}[A-Za-z0-9\\W]{10,}$|^$";
+		 * if (password.matches(regexx)) {
+		 * regexPassword = true;
+		 * } else {
+		 * regexPassword = false;
+		 * }
+		 * errors.state(request, regexPassword, "password", "investor.application.error.password.regex");
+		 * }
+		 */
+
 		if (!errors.hasErrors("ticker")) {
 			Boolean unique = null;
 			unique = this.repository.findApplicationByTicker(entity.getTicker()) != null;
 			errors.state(request, !unique, "ticker", "investor.application.error.duplicatedTicker");
 		}
 
-		if (!errors.hasErrors("password")) {
-			Boolean hasLinkPassword, hasLink, hasPassword = null;
-			hasLink = !request.getModel().getString("additionalInformation").isEmpty();
-			hasPassword = !request.getModel().getString("password").isEmpty();
-			if (!hasLink && hasPassword) {
-				hasLinkPassword = false;
-			} else {
-				hasLinkPassword = true;
-			}
-			errors.state(request, hasLinkPassword, "password", "investor.application.error.password");
-
-			Boolean regexPassword = null;
-			String password = request.getModel().getString("password");
-			String regexx = "^(?=.*[A-Za-z]){1,}(?=.*[0-9]){1,}(?=.*[\\W]){1,}[A-Za-z0-9\\W]{10,}$|^$";
-			if (password.matches(regexx)) {
-				regexPassword = true;
-			} else {
-				regexPassword = false;
-			}
-			errors.state(request, regexPassword, "password", "investor.application.error.password.regex");
-		}
 	}
 
 	@Override

@@ -13,9 +13,9 @@ public class Dashboard implements Serializable {
 
 	private static final long	serialVersionUID	= 1L;
 
-	Double						ratioInvestmentXX1;
-	Double						ratioApplicationsXX1;
-	Double						ratioApplicationsXX2;
+	Double						ratioInvestmentRomp;
+	Double						ratioApplicationsAddiInfo;
+	Double						ratioApplicationsPass;
 
 	Integer						numberOfNotices;
 	Integer						numberOfTechnologyRecords;

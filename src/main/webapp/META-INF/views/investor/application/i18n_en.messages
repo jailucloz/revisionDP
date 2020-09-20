@@ -25,3 +25,4 @@ investor.application.form.button.create = Create application
 investor.application.form.button.return = Return
 
 investor.application.ticker.pattern = match the pattern: “SSS-YY-NNNNNN”.  “SSS” denotes the sector, “YY” denotes the creation year; and “NNNNNN” is number in range 0 up to 999999
+investor.application.password.pattern = Minimum length of 10 characters and that it includes at least one letter, one digit, and one punctuation symbol

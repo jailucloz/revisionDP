@@ -5,7 +5,7 @@ investor.investmentRound.form.label.title = Título:
 investor.investmentRound.form.label.description = Descripción:
 investor.investmentRound.form.label.amountMoney = Cantidad de dinero:
 investor.investmentRound.form.label.link = Enlace:
-investor.investmentRound.yeah.list = Yeah!
+investor.investmentRound.romp.list = Romp
 
 investor.application.create = Solicitar ronda de inversión
 

@@ -61,7 +61,7 @@ public class Application extends DomainEntity {
 	@URL
 	private String				additionalInformation;
 
-	@Pattern(regexp = "^(?=.*[A-Za-z]){1,}(?=.*[0-9]){1,}(?=.*[\\W]){1,}[A-Za-z0-9\\W]{10,}$|^$")
+	@Pattern(regexp = "^(?=.*[A-Za-z]){1,}(?=.*[0-9]){1,}(?=.*[\\W]){1,}[A-Za-z0-9\\W]{10,}$|^$", message = "{investor.application.password.pattern}")
 	private String				password;
 
 	// Relationships ----------------------------------------------

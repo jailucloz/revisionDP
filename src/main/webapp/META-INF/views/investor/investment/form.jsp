@@ -14,10 +14,10 @@
 	
 	
 	
-		<a href=/acme-incubator/investor/yeah/list?id=${id}><acme:message code="investor.investmentRound.yeah.list" /></a>
+		<a href=/acme-incubator/investor/romp/list?id=${id}><acme:message code="investor.investmentRound.romp.list" /></a>
     	<p></p>
 	
-		<acme:form-return code="investor.application.create" action="/investor/application/create?id=${id}"/>
+		<acme:form-return code="investor.application.create" action="/investor/application/create?invId=${id}"/>
 	
 	
 	

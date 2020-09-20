@@ -33,15 +33,15 @@ public class AdministratorDashboardShowService implements AbstractShowService<Ad
 		assert entity != null;
 		assert model != null;
 
-		Double numberOfInvestmentHaveXX1 = this.repository.numberOfInvestmentHaveRomp().doubleValue();
+		Double numberOfInvestmentHaveRomp = this.repository.numberOfInvestmentHaveRomp().doubleValue();
 		Double numberOfInvestment = this.repository.numberOfInvestment().doubleValue();
-		Double ratioInvestmentXX1 = numberOfInvestmentHaveXX1 / numberOfInvestment * 100;
+		Double ratioInvestmentRomp = numberOfInvestmentHaveRomp / numberOfInvestment * 100;
 
 		Double numberOfApplication = this.repository.numberOfApplication().doubleValue();
-		Double numberOfApplicationHaveXX1 = this.repository.numberOfApplicationHaveXX1().doubleValue();
-		Double numberOfApplicationHaveXX2 = this.repository.numberOfApplicationHaveXX2().doubleValue();
-		Double ratioApplicationsXX1 = numberOfApplicationHaveXX1 / numberOfApplication * 100;
-		Double ratioApplicationsXX2 = numberOfApplicationHaveXX2 / numberOfApplication * 100;
+		Double numberOfApplicationHaveAddiInfo = this.repository.numberOfApplicationHaveAdditionalInformation2().doubleValue();
+		Double numberOfApplicationHavePass = this.repository.numberOfApplicationHavePassword().doubleValue() + this.repository.numberOfApplicationHavePassword2().doubleValue();
+		Double ratioApplicationsAddiInfo = numberOfApplicationHaveAddiInfo / numberOfApplication * 100;
+		Double ratioApplicationsPass = numberOfApplicationHavePass / numberOfApplication * 100;
 
 		Integer numberOfNotices = this.repository.numberOfNotices();
 		Integer numberOfTechnologyRecords = this.repository.numberOfTechnologyRecords();
@@ -107,9 +107,9 @@ public class AdministratorDashboardShowService implements AbstractShowService<Ad
 			tSource.set(1, "Open Source");
 		}
 
-		entity.setRatioInvestmentXX1(ratioInvestmentXX1);
-		entity.setRatioApplicationsXX1(ratioApplicationsXX1);
-		entity.setRatioApplicationsXX2(ratioApplicationsXX2);
+		entity.setRatioInvestmentRomp(ratioInvestmentRomp);
+		entity.setRatioApplicationsAddiInfo(ratioApplicationsAddiInfo);
+		entity.setRatioApplicationsPass(ratioApplicationsPass);
 
 		entity.setNumberOfNotices(numberOfNotices);
 		entity.setNumberOfTechnologyRecords(numberOfTechnologyRecords);
@@ -137,7 +137,7 @@ public class AdministratorDashboardShowService implements AbstractShowService<Ad
 		entity.setTSource(tSource);
 		entity.setToolsBySource(toolsBySource);
 
-		request.unbind(entity, model, "ratioInvestmentXX1", "ratioApplicationsXX1", "ratioApplicationsXX2", "numberOfNotices", "numberOfTechnologyRecords", "numberOfTools", "minimumMoneyActiveInquires", "maximumMoneyActiveInquires",
+		request.unbind(entity, model, "ratioInvestmentRomp", "ratioApplicationsAddiInfo", "ratioApplicationsPass", "numberOfNotices", "numberOfTechnologyRecords", "numberOfTools", "minimumMoneyActiveInquires", "maximumMoneyActiveInquires",
 			"averageMoneyActiveInquires", "stddevMoneyActiveInquires", "minimumMoneyActiveOvertures", "maximumMoneyActiveOvertures", "averageMoneyActiveOvertures", "stddevMoneyActiveOvertures", "trSectors", "technologiesBySector", "trSource",
 			"technologiesBySource", "tSectors", "toolsBySector", "tSource", "toolsBySource");
 	}

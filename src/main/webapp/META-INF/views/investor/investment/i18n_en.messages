@@ -5,7 +5,7 @@ investor.investmentRound.form.label.title = Title:
 investor.investmentRound.form.label.description = Description:
 investor.investmentRound.form.label.amountMoney = Amount money:
 investor.investmentRound.form.label.link = Link:
-investor.investmentRound.yeah.list = Yeah!
+investor.investmentRound.romp.list = Romp
 
 investor.application.create = Apply investment round
 

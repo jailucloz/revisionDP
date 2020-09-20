@@ -21,10 +21,16 @@ public interface AdministratorDashboardRepository extends AbstractRepository {
 	Integer numberOfApplication();
 
 	@Query("select count(i) from Application i where i.additionalInformation != null")
-	Integer numberOfApplicationHaveXX1();
+	Integer numberOfApplicationHaveAdditionalInformation();
+
+	@Query("select count(i) from Application i where i.additionalInformation != ''")
+	Integer numberOfApplicationHaveAdditionalInformation2();
 
 	@Query("select count(i) from Application i where i.password != null")
-	Integer numberOfApplicationHaveXX2();
+	Integer numberOfApplicationHavePassword();
+
+	@Query("select count(i) from Application i where i.password != ''")
+	Integer numberOfApplicationHavePassword2();
 
 	@Query("select count(n) from Notice n")
 	Integer numberOfNotices();

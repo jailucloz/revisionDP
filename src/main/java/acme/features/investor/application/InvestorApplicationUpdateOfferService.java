@@ -31,7 +31,7 @@ public class InvestorApplicationUpdateOfferService implements AbstractUpdateServ
 		assert entity != null;
 		assert errors != null;
 
-		request.bind(entity, errors, "romp");
+		request.bind(entity, errors);
 
 	}
 
@@ -66,14 +66,14 @@ public class InvestorApplicationUpdateOfferService implements AbstractUpdateServ
 
 		Boolean hasRomp = this.repository.findRompsByInvestment(entity.getInvestmentRound().getId()) != null;
 		Boolean hasAddInfo = entity.getAdditionalInformation() != "";
-		Boolean password = entity.getPassword() != null;
+		Boolean password = entity.getPassword() != "";
 
 		if (!errors.hasErrors("additionalInformation")) {
-			errors.state(request, hasRomp || !hasAddInfo, "additionalInformation", "erorrs.password", "true");
+			errors.state(request, hasRomp || !hasAddInfo, "additionalInformation", "erorrs.password", entity.getAdditionalInformation());
 		}
 
 		if (!errors.hasErrors("password")) {
-			errors.state(request, !password || hasAddInfo, "additionalInformation", "erorrs.password", "true");
+			errors.state(request, !password || hasAddInfo, "additionalInformation", "erorrs.password", entity.getPassword());
 		}
 
 	}
@@ -83,13 +83,18 @@ public class InvestorApplicationUpdateOfferService implements AbstractUpdateServ
 		assert request != null;
 		assert entity != null;
 
-		Application result;
-		int id;
+		/*
+		 * Application result;
+		 * int id;
+		 *
+		 * id = request.getModel().getInteger("id");
+		 * result = this.repository.findOneApplicationById(id);
+		 *
+		 *
+		 * this.repository.save(result);
+		 */
 
-		id = request.getModel().getInteger("id");
-		result = this.repository.findOneApplicationById(id);
-
-		this.repository.save(result);
+		this.repository.save(entity);
 
 	}
 
